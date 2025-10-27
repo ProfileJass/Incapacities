@@ -1,0 +1,169 @@
+{
+  "info": {
+    "name": "Incapacities API Examples",
+    "description": "Colección de ejemplos para el microservicio de incapacidades"
+  },
+  "examples": {
+    "healthCheck": {
+      "method": "GET",
+      "url": "http://localhost:3000/health",
+      "description": "Verificar estado del servicio"
+    },
+    "createIncapacity": {
+      "method": "POST",
+      "url": "http://localhost:3000/api/incapacities",
+      "headers": {
+        "Content-Type": "application/json"
+      },
+      "body": {
+        "user": {
+          "firstName": "María",
+          "lastName": "García",
+          "email": "maria.garcia@example.com",
+          "role": "employee"
+        },
+        "payroll": {
+          "nameCompany": "Corporación TechnoSoft S.A.S",
+          "NIT": "900123456-7",
+          "adressCompany": "Carrera 7 #32-16, Oficina 501",
+          "phone": "+573101234567"
+        },
+        "incapacity": {
+          "start_date": "2025-10-27",
+          "end_date": "2025-10-30",
+          "type": "enfermedad",
+          "observacion": "Gripe común con fiebre alta"
+        }
+      }
+    },
+    "createIncapacityAccidente": {
+      "method": "POST",
+      "url": "http://localhost:3000/api/incapacities",
+      "headers": {
+        "Content-Type": "application/json"
+      },
+      "body": {
+        "user": {
+          "firstName": "Carlos",
+          "lastName": "Rodríguez",
+          "email": "carlos.rodriguez@example.com",
+          "role": "operator"
+        },
+        "payroll": {
+          "nameCompany": "Industrias XYZ Ltda",
+          "NIT": "800987654-3",
+          "adressCompany": "Zona Industrial Km 5",
+          "phone": "+573209876543"
+        },
+        "incapacity": {
+          "start_date": "2025-10-26",
+          "end_date": "2025-11-10",
+          "type": "accidente",
+          "observacion": "Accidente laboral - fractura de muñeca derecha"
+        }
+      }
+    },
+    "createIncapacityMaternidad": {
+      "method": "POST",
+      "url": "http://localhost:3000/api/incapacities",
+      "headers": {
+        "Content-Type": "application/json"
+      },
+      "body": {
+        "user": {
+          "firstName": "Ana",
+          "lastName": "Martínez",
+          "email": "ana.martinez@example.com",
+          "role": "manager"
+        },
+        "payroll": {
+          "nameCompany": "Servicios Empresariales S.A.",
+          "NIT": "900555444-2",
+          "adressCompany": "Avenida El Dorado #68-90",
+          "phone": "+573155554444"
+        },
+        "incapacity": {
+          "start_date": "2025-11-01",
+          "end_date": "2026-02-28",
+          "type": "maternidad",
+          "observacion": "Licencia de maternidad programada"
+        }
+      }
+    },
+    "getAllIncapacities": {
+      "method": "GET",
+      "url": "http://localhost:3000/api/incapacities",
+      "description": "Obtener todas las incapacidades radicadas"
+    },
+    "getIncapacitiesByUser": {
+      "method": "GET",
+      "url": "http://localhost:3000/api/incapacities/user/{userId}",
+      "description": "Obtener incapacidades de un usuario específico",
+      "note": "Reemplazar {userId} con un UUID válido de usuario"
+    },
+    "updateIncapacity": {
+      "method": "PUT",
+      "url": "http://localhost:3000/api/incapacities/{id}",
+      "headers": {
+        "Content-Type": "application/json"
+      },
+      "body": {
+        "start_date": "2025-10-28",
+        "end_date": "2025-11-01",
+        "status": "confirmada",
+        "observacion": "Actualización de fechas - confirmación médica recibida"
+      },
+      "note": "Reemplazar {id} con un UUID válido de incapacidad"
+    },
+    "updateIncapacityStatus": {
+      "method": "PUT",
+      "url": "http://localhost:3000/api/incapacities/{id}",
+      "headers": {
+        "Content-Type": "application/json"
+      },
+      "body": {
+        "status": "en trámite"
+      },
+      "note": "Cambiar solo el estado de la incapacidad"
+    },
+    "rejectIncapacity": {
+      "method": "PUT",
+      "url": "http://localhost:3000/api/incapacities/{id}",
+      "headers": {
+        "Content-Type": "application/json"
+      },
+      "body": {
+        "status": "negada",
+        "observacion": "Documentación incompleta - falta certificado médico"
+      },
+      "note": "Negar una incapacidad con observación"
+    }
+  },
+  "statusCodes": {
+    "200": "OK - Operación exitosa",
+    "201": "Created - Recurso creado exitosamente",
+    "400": "Bad Request - Error de validación",
+    "404": "Not Found - Recurso no encontrado",
+    "500": "Internal Server Error - Error del servidor"
+  },
+  "validations": {
+    "types": [
+      "accidente",
+      "maternidad",
+      "enfermedad"
+    ],
+    "statuses": [
+      "pendiente",
+      "en trámite",
+      "confirmada",
+      "negada"
+    ],
+    "notes": [
+      "El estado inicial siempre es 'pendiente'",
+      "Las fechas deben estar en formato ISO (YYYY-MM-DD)",
+      "La fecha de fin debe ser posterior a la fecha de inicio",
+      "El email debe tener formato válido",
+      "La observación es opcional"
+    ]
+  }
+}

@@ -29,9 +29,7 @@ const bootstrap = async () => {
     const app = createApp(incapacityController);
 
     app.listen(config.port, () => {
-      console.log(`🚀 Server running on port ${config.port}`);
-      console.log(`📍 Environment: ${config.nodeEnv}`);
-      console.log(`🏥 Incapacities microservice is ready`);
+      console.log(`Server running on port ${config.port}`);
     });
   } catch (error) {
     console.error('Failed to start server:', error);
